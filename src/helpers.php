@@ -7,8 +7,9 @@ use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
 /**
- * @param  \PhpCsFixer\Finder $finder
- * @param  array  $rules
+ * @param \PhpCsFixer\Finder $finder
+ * @param array              $rules
+ *
  * @return \PhpCsFixer\Config
  */
 function styles(Finder $finder, array $rules = []): Config
@@ -19,7 +20,7 @@ function styles(Finder $finder, array $rules = []): Config
 
     return Config::create()
         ->registerCustomFixers([
-            new ForceFQCNFixer()
+            new ForceFQCNFixer(),
         ])
         ->setFinder($finder)
         ->setRiskyAllowed(true)
