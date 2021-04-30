@@ -24,7 +24,7 @@ You can also add it manually, like this, to get the latest version:
 
 You can publish the stub file using
 ```bash
-php artisan vendor:publish --provider=BinaryCats\\PhpStyles\\PhpStyleServiceProvider
+php artisan vendor:publish --provider=BinaryCats\\PhpStyles\\PhpStylesServiceProvider
 ```
 
 You should also add `.php_cs.cache` to your `.gitignore`.
