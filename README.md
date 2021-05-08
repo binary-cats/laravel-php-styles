@@ -16,7 +16,7 @@ You can also add it manually, like this, to get the latest version:
 
 ```json
     "require-dev": {
-        "binary-cats/laravel-php-styles": "^1.0"
+        "binary-cats/laravel-php-styles": "^2.0"
     },
 ```
 
@@ -24,10 +24,10 @@ You can also add it manually, like this, to get the latest version:
 
 You can publish the stub file using
 ```bash
-php artisan vendor:publish --provider=BinaryCats\\PhpStyles\\PhpStylesServiceProvider
+php artisan vendor:publish --provider=BinaryCats\\PhpStyles\\PhpStyleServiceProvider
 ```
 
-You should also add `.php_cs.cache` to your `.gitignore`.
+You should also add `.php-cs-fixer.cache` to your `.gitignore`.
 
 ## Config
 
@@ -37,9 +37,7 @@ The package provides with the current set of [rules](./src/rules.php):
 return [
     '@Symfony' => true,
     'AdamWojs/phpdoc_force_fqcn_fixer' => true,
-    'array_syntax' => ['syntax' => 'short'],
     'concat_space' => ['spacing' => 'one'],
-    'final_class' => false,
     'new_with_braces' => true,
     'no_superfluous_phpdoc_tags' => false,
     'not_operator_with_successor_space' => true,
@@ -50,7 +48,7 @@ return [
 
 ## Integration
 
-PHP-CS-Fixer is going to expect your configuration to be in a `/.php_cs.dist` file.
+PHP-CS-Fixer is going to expect your *default* configuration to be in a `/.php-cs-fixer.dist.php` file.
 
 ```php
 <?php
@@ -75,7 +73,7 @@ And now you can run the fix like this:
 
 If you want to see the progress as you go by:
 ```bash
-./vendor/bin/php-cs-fixer fix --verbose --show-progress=estimate
+./vendor/bin/php-cs-fixer fix --verbose --show-progress=dots
 ```
 
 If you want to add this to composer alias, you can add this to your `composer.json`:
@@ -88,15 +86,26 @@ If you want to add this to composer alias, you can add this to your `composer.js
 
 ## Advanced Use
 
-If you want to change the rules, disable, or add your own, simply update `.php_cs.dist` in your project's root:
+If you want to change the rules, disable, or add your own, simply update `.php-cs-fixer.dist.php` in your project's root:
 
 ```php
+...
 return BinaryCats\PhpStyles\styles($finder, [
-    // turn the force FQCN fixer off
-    'AdamWojs/phpdoc_force_fqcn_fixer' => false,
     // Do not wrap concat . with spaces
     'concat_space' => ['spacing' => 'none'],
 ]);
+```
+
+If you want to add more custom fixers, there is a third argument:
+```php
+...
+return BinaryCats\PhpStyles\styles($finder, [
+    // turn the force FQCN fixer off
+    'AdamWojs/phpdoc_force_fqcn_fixer' => false,
+], [
+    new \AdamWojs\PhpCsFixerPhpdocForceFQCN\Fixer\Phpdoc\ForceFQCNFixer,
+]);
+
 ```
 
 ## Change log
