@@ -14,9 +14,11 @@ use PhpCsFixer\Finder;
  */
 function styles(Finder $finder, array $rules = [], array $fixers = []): Config
 {
-    $rules = array_merge(require __DIR__.'/rules.php', $rules);
+    $rules = array_merge(require __DIR__ . '/rules.php', $rules);
 
-    return Config::create()
+    $config = new Config();
+
+    return $config
         ->registerCustomFixers($fixers)
         ->setFinder($finder)
         ->setRiskyAllowed(true)

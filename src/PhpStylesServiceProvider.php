@@ -15,7 +15,7 @@ class PhpStylesServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../stubs/php_cs.stub' => base_path('.php_cs.dist'),
+                __DIR__ . '/../stubs/php-cs-fixer.stub' => base_path('.php-cs-fixer.dist.php'),
             ]);
         }
     }
